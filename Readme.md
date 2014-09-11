@@ -16,6 +16,8 @@ _VJAutocomplete_ table for text field is pinned to the text field that must be g
 
 _VJAutocomplete_ inherits from UITableView.
 
+If user is writing and text is the same as before (plus some characters) and it had no suggestions before then do not search for suggestions. It is really helpful if we do not want to ask for data too much. For example if there is too much source data to filter.
+
 How to use it
 --------
 

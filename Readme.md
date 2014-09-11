@@ -1,24 +1,26 @@
 VJAutocomplete
 ===================
-Autocomplete for iOS applications using UITextField. 
+Autocomplete for iOS applications. 
 
 ![Alt text](/autocompleteDemo.gif "Demo")
 
 About
 --------
-It is a basic autocomplete that helps user with writing. Very simmilr to classic web autocompletes.
+It is a basic autocomplete that helps user with writing. Very simmilar to classic web autocompletes.
 
-Writen in Objective-C and also beeing rewriting to Swift (Will be here soon).
+Written in Objective-C (Swift comming soon).
 
-This repository has _VJAutocomplete_ writen in Objective-C in the directory _VJAutocomplete_ObjC_, then _VJAutocomplete_Swift_ (Comming soon) and _VJAutocompleteDemo_ project for you to see how it works. 
 
 How it works
 --------
-_VJAutocomplete_ table for text field is pinned to the text field that must be given. User starts writing to the text field and _VJAutocomplete_ show if has any suggestion. If there is no suggestion then hide. User can choose suggestion by clicking on it. If user choose any suggestion then it diseppeared and add text to text field. If user continues adding text then _VJAutocomplete_ start showing another suggestions or diseppead if has no.
+_VJAutocomplete_ is a table pinned to UITextField. 
+*Text field is created by developer not autocomplete.*
+
+User starts writing to the text field and _VJAutocomplete_ show if has any suggestion. If there is no suggestion then hide. User can choose suggestion by clicking on it. If any suggestion is cliced then autocomplete disappear and text is added to text field.
 
 _VJAutocomplete_ inherits from UITableView.
 
-If user is writing and text is the same as before (plus some characters) and it had no suggestions before then do not search for suggestions. It is really helpful if we do not want to ask for data too much. For example if there is too much source data to filter.
+If user is writing and text is the same as before (plus some characters) and it had no suggestions before then it does not search for suggestions. It is really helpful if we do not want to ask for data too much.
 
 Usage
 --------
@@ -45,7 +47,7 @@ Usage
     }
     ```
 
-### Optional settings ######
+### Optional ######
 
 - Call `[self.mainAutocomplete hideAutocomplete]` if you want to hide autocomplete
 - Set `minCountOfCharsToShow` property to set number of characters needed to be written to show autocomplete

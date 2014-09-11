@@ -54,6 +54,8 @@
     self.mainAutocomplete = [[VJAutocomplete alloc] initWithTextField:self.mainTextField];
     // Set the data source as self and define it
     [self.mainAutocomplete setAutocompleteDataSource:self];
+    // Set minimum count of characters to show autocomplete
+    self.mainAutocomplete.minCountOfCharsToShow = 1;
 }
 
 // -------------------------------------------------------------------------------

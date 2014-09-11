@@ -56,6 +56,8 @@
     [self.mainAutocomplete setAutocompleteDataSource:self];
     // Set minimum count of characters to show autocomplete
     self.mainAutocomplete.minCountOfCharsToShow = 1;
+    // Set maximum of visible rows
+    self.mainAutocomplete.maxVisibleRowsCount = 2;
 }
 
 // -------------------------------------------------------------------------------

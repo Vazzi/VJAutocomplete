@@ -102,11 +102,6 @@ replacementString:(NSString *)string
 
 - (NSArray *) getItemsArrayWithSubstring:(NSString *) substring
 {
-    // Substring length is smaller than 3 return nothing
-    if ( [substring length] < 3 ) {
-        return @[];
-    }
-    
     // Create predicate
     NSPredicate *beginsWithPredicate = [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@",
                                         substring];

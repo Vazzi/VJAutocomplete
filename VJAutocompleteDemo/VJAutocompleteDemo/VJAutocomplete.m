@@ -218,8 +218,10 @@
 
 - (void)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    // Get the current string from textfield
     NSString *substring = [NSString stringWithString:self.textField.text];
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
+    // Search for suggestions
     [self searchAutocompleteEntriesWithSubstring:substring];
 }
 

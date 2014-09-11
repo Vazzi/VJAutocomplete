@@ -34,6 +34,10 @@
 #define VJAUTOCOMPLETE_DEFAULT_MAX_CELLS 2
 #define VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT 44
 // -------------------------------------------------------------------------------
+// Default values of autocomplete
+// -------------------------------------------------------------------------------
+#define VJAUTOCOMPLETE_CELL_IDENTIFIER @"VJAutoCompleteCellIdentifier"
+// -------------------------------------------------------------------------------
 
 @interface VJAutocomplete()
 
@@ -203,15 +207,13 @@
     return [self.autocompleteItemsArray count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
-    static NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
-    cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VJAUTOCOMPLETE_CELL_IDENTIFIER];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:AutoCompleteRowIdentifier];
+                                      reuseIdentifier:VJAUTOCOMPLETE_CELL_IDENTIFIER];
     }
     
     cell = [self.autocompleteDataSource setCell:cell withItem:[self.autocompleteItemsArray objectAtIndex:indexPath.row]];
@@ -226,8 +228,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Get the cell
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    // Set text to
     self.textField.text = selectedCell.textLabel.text;
+    // Hide self
     [self hideAutocomplete];
 }
 

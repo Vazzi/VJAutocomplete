@@ -2,6 +2,8 @@ VJAutocomplete
 ===================
 Autocomplete for iOS applications using UITextField. 
 
+![Alt text](/autocompleteDemo.png "Demo")
+
 About
 --------
 It is a basic autocomplete that helps user with writing. Very simmilr to classic web autocompletes.

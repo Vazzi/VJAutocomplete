@@ -65,15 +65,7 @@
         // Maximum height of autocomplete
         self.maxHeight = self.maxSuggestions * VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
         
-        self.backgroundColor = [UIColor whiteColor];
-        self.delegate = self;
-        self.dataSource = self;
-        self.scrollEnabled = YES;
-        self.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-        self.layer.cornerRadius = 8.0f;
-        self.layer.borderWidth = 1.5f;
-        self.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-        self.rowHeight = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
+        [self setupTableView];
         
         self.autocompleteItemsArray = [[NSMutableArray alloc] init];
         
@@ -81,9 +73,31 @@
     return self;
 }
 
+
 // -------------------------------------------------------------------------------
 #pragma mark - Setups
 // -------------------------------------------------------------------------------
+- (void)setupTableView
+{
+    // Protocols
+    self.dataSource = self;
+    self.delegate = self;
+    
+    // Properties
+    self.scrollEnabled = YES;
+    
+    // Visual properties
+    self.backgroundColor = [UIColor whiteColor];
+    self.rowHeight = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
+    
+    // Border
+    self.layer.cornerRadius = 8.0f;
+    self.layer.borderWidth = 1.5f;
+    self.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    
+    // Empty footer
+    self.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
 
 
 // -------------------------------------------------------------------------------

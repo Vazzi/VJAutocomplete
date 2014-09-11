@@ -47,18 +47,22 @@
 @implementation VJAutocomplete
 
 // -------------------------------------------------------------------------------
-#pragma mark - Public methods
+#pragma mark - Init methods
 // -------------------------------------------------------------------------------
 
 - (id)initWithTextField:(UITextField *)textField
 {
     self = [super init];
     if (self) {
-        
+        // Text field
         self.textField = textField;
+        // Set parent view as text field super view
         self.parentView = textField.superview;
+        // Autocomplete is not visible
         self.isVisible = NO;
+        // Maximum number of suggestion
         self.maxSuggestions = VJAUTOCOMPLETE_DEFAULT_MAX_CELLS;
+        // Maximum height of autocomplete
         self.maxHeight = self.maxSuggestions * VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
         
         self.backgroundColor = [UIColor whiteColor];
@@ -76,6 +80,15 @@
     }
     return self;
 }
+
+// -------------------------------------------------------------------------------
+#pragma mark - Setups
+// -------------------------------------------------------------------------------
+
+
+// -------------------------------------------------------------------------------
+#pragma mark - Public methods
+// -------------------------------------------------------------------------------
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring
 {

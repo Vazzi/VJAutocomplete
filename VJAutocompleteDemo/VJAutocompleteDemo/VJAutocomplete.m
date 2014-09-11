@@ -64,9 +64,9 @@
         self.maxSuggestions = VJAUTOCOMPLETE_DEFAULT_MAX_CELLS;
         // Maximum height of autocomplete
         self.maxHeight = self.maxSuggestions * VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
-        
+        // Setup table view
         [self setupTableView];
-        
+        // Init data array
         self.autocompleteItemsArray = [[NSMutableArray alloc] init];
         
     }

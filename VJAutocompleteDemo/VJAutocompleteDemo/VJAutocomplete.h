@@ -72,8 +72,7 @@
 @property (nonatomic) BOOL doNotShow; //!< Do not show autocomplete
 
 // Other properties
-@property (nonatomic) NSUInteger maxSuggestions; //!< Maximum number of suggestions
-@property (nonatomic) NSUInteger maxHeight; //!< Maximum height of autocomplete
+@property (nonatomic) NSUInteger maxVisibleRowsCount; //!< Maximum height of autocomplete based on max visible rows
 @property (nonatomic) NSUInteger minCountOfCharsToShow; //!< Minimum count of characters needed to show autocomplete
 
 @property(nonatomic,assign) id<VJAutocompleteDataSource> autocompleteDataSource; //!< Manipulation with data
@@ -114,9 +113,5 @@
 - (void)shouldChangeCharactersInRange:(NSRange)range
                     replacementString:(NSString *)string;
 
-/*! Set maximum number of suggestions and compute autocomplete maximum height.
- \param maxSuggestions Maximum number of suggestions
- */
-- (void)maxSuggestions:(NSUInteger)maxSuggestions;
 
 @end

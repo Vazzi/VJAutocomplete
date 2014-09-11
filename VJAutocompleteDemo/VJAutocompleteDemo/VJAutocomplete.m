@@ -31,7 +31,7 @@
 // -------------------------------------------------------------------------------
 // Default values of autocomplete
 // -------------------------------------------------------------------------------
-#define VJAUTOCOMPLETE_DEFAULT_MAX_CELLS 2
+#define VJAUTOCOMPLETE_DEFAULT_MAX_VISIBLE_ROWS 2
 #define VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT 44
 #define VJAUTOCOMPLETE_DEFAULT_MIN_CHARS 3
 // -------------------------------------------------------------------------------
@@ -70,10 +70,8 @@
         self.parentView = textField.superview;
         // Autocomplete is not visible
         self.isVisible = NO;
-        // Maximum number of suggestion
-        self.maxSuggestions = VJAUTOCOMPLETE_DEFAULT_MAX_CELLS;
-        // Maximum height of autocomplete
-        self.maxHeight = self.maxSuggestions * VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
+        // Maximum visible rows
+        self.maxVisibleRowsCount = VJAUTOCOMPLETE_DEFAULT_MAX_VISIBLE_ROWS;
         // Minimum characters
         self.minCountOfCharsToShow = VJAUTOCOMPLETE_DEFAULT_MIN_CHARS;
         // Setup table view
@@ -189,14 +187,14 @@
     
     self.isVisible = YES;
     
-    NSInteger numberOfCells = [self.autocompleteItemsArray count];
+    NSInteger visibleRowsCount = [self.autocompleteItemsArray count];
     
     // Set number of cells (do not show more than maxSuggestions)
-    if ([self.autocompleteItemsArray count] > self.maxSuggestions) {
-        numberOfCells = self.maxSuggestions;
+    if ([self.autocompleteItemsArray count] > self.maxVisibleRowsCount) {
+        visibleRowsCount = self.maxVisibleRowsCount;
     }
     // Calculate autocomplete height
-    CGFloat height = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT * numberOfCells;
+    CGFloat height = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT * visibleRowsCount;
     
     // Set origin of autocomplete by TextField position
     CGPoint textViewOrigin;
@@ -223,13 +221,6 @@
     substring = [substring stringByReplacingCharactersInRange:range withString:string];
     // Search for suggestions
     [self searchAutocompleteEntriesWithSubstring:substring];
-}
-
-
-- (void)maxSuggestions:(NSUInteger)maxSuggestions
-{
-    self.maxSuggestions = maxSuggestions;
-    self.maxHeight = self.maxSuggestions + VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
 }
 
 

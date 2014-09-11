@@ -169,7 +169,9 @@
 
 - (void)hideAutocomplete
 {
-    if(self.isVisible == NO) return;
+    if (self.isVisible == NO) {
+        return;
+    }
     [self removeFromSuperview];
     self.isVisible = NO;
 }
@@ -181,29 +183,36 @@
         return;
     }
     
-    if(self.isVisible == YES)
+    if (self.isVisible == YES) {
         [self removeFromSuperview];
+    }
     
     self.isVisible = YES;
     
     NSInteger numberOfCells = [self.autocompleteItemsArray count];
-    if([self.autocompleteItemsArray count] > self.maxSuggestions)
-        numberOfCells = self.maxSuggestions;
     
+    // Set number of cells (do not show more than maxSuggestions)
+    if ([self.autocompleteItemsArray count] > self.maxSuggestions) {
+        numberOfCells = self.maxSuggestions;
+    }
+    // Calculate autocomplete height
     CGFloat height = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT * numberOfCells;
     
+    // Set origin of autocomplete by TextField position
     CGPoint textViewOrigin;
-    
-    if ( [self.parentView isEqual:self.textField.superview] ) {
+    if ([self.parentView isEqual:self.textField.superview]) {
         textViewOrigin = self.textField.frame.origin;
     } else {
-        textViewOrigin = [self.textField convertPoint:self.textField.frame.origin toView:self.parentView];
+        textViewOrigin = [self.textField convertPoint:self.textField.frame.origin
+                                               toView:self.parentView];
     }
     
+    // Set frame of autocomplete
     CGRect newFrame = CGRectMake(textViewOrigin.x, textViewOrigin.y + CGRectGetHeight(self.textField.bounds), CGRectGetWidth(self.textField.bounds), height);
-    
     self.frame = newFrame;
+    // Show in front of everything
     self.layer.zPosition = MAXFLOAT;
+    
     [self.parentView addSubview:self];
 }
 

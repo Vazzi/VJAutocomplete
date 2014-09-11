@@ -124,30 +124,41 @@
         return;
     }
     
-    
-    if ( [self.lastSubstring isEqualToString:[substring substringToIndex:substring.length - 1]]) {
+    // If substring is the same as before and before it has no suggestions then
+    // do not search for suggestions
+    if ([self.lastSubstring isEqualToString:[substring substringToIndex:substring.length - 1]]) {
         if ( lastCount == 0 ) {
             self.lastSubstring = substring;
             return;
         }
     }
     
+    // Save as last substring
     self.lastSubstring = substring;
     
-    __weak __typeof__(self) blockSelf = self;
     
+    __weak __typeof__(self) blockSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,
                                              (unsigned long)NULL), ^(void) {
-        blockSelf.autocompleteItemsArray =  [[NSMutableArray alloc] initWithArray:[self.autocompleteDataSource getItemsArrayWithSubstring:substring]];
+        // Save new suggestions
+        blockSelf.autocompleteItemsArray =  [[NSMutableArray alloc]
+                                             initWithArray:[self.autocompleteDataSource getItemsArrayWithSubstring:substring]];
+        
+        // Call show or hide autocomplete and reload data on main thread
         dispatch_async(dispatch_get_main_queue(), ^{
-            if([blockSelf.autocompleteItemsArray count] != 0)
-                [blockSelf showAutocomplete];
-            else
-                [blockSelf hideAutocomplete];
             
+            if([blockSelf.autocompleteItemsArray count] != 0) {
+                [blockSelf showAutocomplete];
+            } else {
+                [blockSelf hideAutocomplete];
+            }
+
             [blockSelf reloadData];
+            
         });
+        
     });
+    
 }
 
 - (void)hideAutocomplete

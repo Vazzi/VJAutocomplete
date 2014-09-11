@@ -35,9 +35,13 @@
 #define VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT 44
 #define VJAUTOCOMPLETE_DEFAULT_MIN_CHARS 3
 // -------------------------------------------------------------------------------
-// Default values of autocomplete
+// Cell identifier
 // -------------------------------------------------------------------------------
-#define VJAUTOCOMPLETE_CELL_IDENTIFIER @"VJAutoCompleteCellIdentifier"
+#define VJAUTOCOMPLETE_QUEUE_NAME "VJAutocompleteQueue"
+// -------------------------------------------------------------------------------
+// Cell identifier
+// -------------------------------------------------------------------------------
+#define VJAUTOCOMPLETE_CELL_IDENTIFIER @"VJAutocompleteCellIdentifier"
 // -------------------------------------------------------------------------------
 
 @interface VJAutocomplete()
@@ -45,6 +49,7 @@
 // Private properties
 @property (nonatomic) NSString *lastSubstring; //!< Last given substring
 @property (strong, atomic) NSMutableArray *autocompleteItemsArray; //!< Current suggestions
+@property (nonatomic) dispatch_queue_t autocompleteSearchQueue; //!< Queue for searching suggestions
 
 @end
 
@@ -75,6 +80,8 @@
         [self setupTableView];
         // Init data array
         self.autocompleteItemsArray = [[NSMutableArray alloc] init];
+        // Create queue
+        self.autocompleteSearchQueue = dispatch_queue_create(VJAUTOCOMPLETE_QUEUE_NAME, DISPATCH_QUEUE_SERIAL);
         
     }
     return self;
@@ -136,10 +143,9 @@
     // Save as last substring
     self.lastSubstring = substring;
     
-    
     __weak __typeof__(self) blockSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,
-                                             (unsigned long)NULL), ^(void) {
+    
+    dispatch_async(self.autocompleteSearchQueue, ^(void) {
         // Save new suggestions
         blockSelf.autocompleteItemsArray =  [[NSMutableArray alloc]
                                              initWithArray:[self.autocompleteDataSource getItemsArrayWithSubstring:substring]];

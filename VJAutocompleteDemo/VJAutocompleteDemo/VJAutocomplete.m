@@ -33,6 +33,7 @@
 // -------------------------------------------------------------------------------
 #define VJAUTOCOMPLETE_DEFAULT_MAX_CELLS 2
 #define VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT 44
+#define VJAUTOCOMPLETE_DEFAULT_MIN_CHARS 3
 // -------------------------------------------------------------------------------
 // Default values of autocomplete
 // -------------------------------------------------------------------------------
@@ -68,6 +69,8 @@
         self.maxSuggestions = VJAUTOCOMPLETE_DEFAULT_MAX_CELLS;
         // Maximum height of autocomplete
         self.maxHeight = self.maxSuggestions * VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
+        // Minimum characters
+        self.minCountOfCharsToShow = VJAUTOCOMPLETE_DEFAULT_MIN_CHARS;
         // Setup table view
         [self setupTableView];
         // Init data array
@@ -110,13 +113,17 @@
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring
 {
-    NSUInteger lastCount = [self.autocompleteItemsArray count];
+    // Last count of items in array
+    NSUInteger const lastCount = [self.autocompleteItemsArray count];
+    // Remove objects from array
     [self.autocompleteItemsArray removeAllObjects];
     
-    if ( [substring length] < 3) {
+    // If substring has less than 3 characters then hide and return
+    if ( [substring length] < self.minCountOfCharsToShow) {
         [self hideAutocomplete];
         return;
     }
+    
     
     if ( [self.lastSubstring isEqualToString:[substring substringToIndex:substring.length - 1]]) {
         if ( lastCount == 0 ) {

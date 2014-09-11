@@ -71,9 +71,10 @@
 // Actions properties
 @property (nonatomic) BOOL doNotShow; //!< Do not show autocomplete
 
-// Visual properties
+// Other properties
 @property (nonatomic) NSUInteger maxSuggestions; //!< Maximum number of suggestions
 @property (nonatomic) NSUInteger maxHeight; //!< Maximum height of autocomplete
+@property (nonatomic) NSUInteger minCountOfCharsToShow; //!< Minimum count of characters needed to show autocomplete
 
 @property(nonatomic,assign) id<VJAutocompleteDataSource> autocompleteDataSource; //!< Manipulation with data
 

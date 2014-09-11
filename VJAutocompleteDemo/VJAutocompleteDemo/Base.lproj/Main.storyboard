@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5V-kd-9Wp">
-                                <rect key="frame" x="107" y="110" width="193" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5V-kd-9Wp">
+                                <rect key="frame" x="107" y="112" width="193" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -25,15 +25,15 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="2ib-M7-f1g"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VJAutocomplete Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-Ux-TED">
-                                <rect key="frame" x="20" y="61" width="280" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VJAutocomplete Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2t-Ux-TED">
+                                <rect key="frame" x="20" y="60" width="280" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Countries:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gg-4D-cEd">
-                                <rect key="frame" x="20" y="114" width="79" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countries:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gg-4D-cEd">
+                                <rect key="frame" x="20" y="117" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,6 +41,17 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.3169149061" green="0.68120210650000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="K2t-Ux-TED" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="7f3-Xe-H5r"/>
+                            <constraint firstItem="9Gg-4D-cEd" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="8J3-KV-dlW"/>
+                            <constraint firstAttribute="trailing" secondItem="n5V-kd-9Wp" secondAttribute="trailing" constant="20" id="9EQ-nr-cRj"/>
+                            <constraint firstAttribute="trailing" secondItem="K2t-Ux-TED" secondAttribute="trailing" constant="20" id="FJt-eh-5L1"/>
+                            <constraint firstItem="n5V-kd-9Wp" firstAttribute="top" secondItem="K2t-Ux-TED" secondAttribute="bottom" constant="26" id="HuX-mn-42T"/>
+                            <constraint firstItem="9Gg-4D-cEd" firstAttribute="centerY" secondItem="n5V-kd-9Wp" secondAttribute="centerY" id="bpb-iN-6Hl"/>
+                            <constraint firstItem="K2t-Ux-TED" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="dUx-NO-tlp"/>
+                            <constraint firstAttribute="centerX" secondItem="K2t-Ux-TED" secondAttribute="centerX" id="hAQ-QW-DCU"/>
+                            <constraint firstItem="n5V-kd-9Wp" firstAttribute="leading" secondItem="9Gg-4D-cEd" secondAttribute="trailing" constant="8" id="xhv-np-d2t"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mainTextField" destination="n5V-kd-9Wp" id="juE-lm-PMC"/>

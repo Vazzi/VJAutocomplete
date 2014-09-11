@@ -219,6 +219,11 @@
     return cell;
 }
 
+
+// -------------------------------------------------------------------------------
+#pragma mark - UITableView delegate
+// -------------------------------------------------------------------------------
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];

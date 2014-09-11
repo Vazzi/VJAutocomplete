@@ -2,7 +2,7 @@ VJAutocomplete
 ===================
 Autocomplete for iOS applications using UITextField. 
 
-![Alt text](/autocompleteDemo.png "Demo")
+![Alt text](/autocompleteDemo.gif "Demo")
 
 About
 --------

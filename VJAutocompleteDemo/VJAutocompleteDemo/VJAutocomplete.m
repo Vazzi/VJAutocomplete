@@ -265,6 +265,9 @@
     self.textField.text = selectedCell.textLabel.text;
     // Hide self
     [self hideAutocomplete];
+    // Call delegate method
+    [self.autocompleteDelegate autocompleteWasSelectedRow:indexPath.row];
+    
 }
 
 

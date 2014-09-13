@@ -14,7 +14,7 @@
 #import "VJCountry.h"
 
 
-@interface VJViewController () <VJAutocompleteDataSource>
+@interface VJViewController () <VJAutocompleteDataSource, VJAutocompleteDelegate>
 
 // Private properties
 @property (strong, nonatomic) NSArray *sourceDataArray;
@@ -52,8 +52,10 @@
 {
     // Initialize it with initWithTextField is recomended
     self.mainAutocomplete = [[VJAutocomplete alloc] initWithTextField:self.mainTextField];
-    // Set the data source as self and define it
+    // Set the data source as self
     [self.mainAutocomplete setAutocompleteDataSource:self];
+    // Set the delegate as self
+    [self.mainAutocomplete setAutocompleteDelegate:self];
     // Set minimum count of characters to show autocomplete
     self.mainAutocomplete.minCountOfCharsToShow = 1;
     // Set maximum of visible rows
@@ -114,6 +116,15 @@ replacementString:(NSString *)string
     NSArray *searchedCountriesArray = [self.sourceDataArray filteredArrayUsingPredicate:beginsWithPredicate];
     
     return searchedCountriesArray;
+}
+
+
+// -------------------------------------------------------------------------------
+#pragma mark - VJAutocomplte data source
+// -------------------------------------------------------------------------------
+- (void)autocompleteWasSelectedRow:(NSInteger)rowIndex
+{
+    [self.mainTextField resignFirstResponder];
 }
 
 

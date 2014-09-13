@@ -38,13 +38,27 @@
  /param item Source data. Data can be any object not only string that is why you have to define the cell text.
  /return cell that has been given and modified
  */
-- (UITableViewCell *) setCell:(UITableViewCell *)cell withItem:(id)item;
+- (UITableViewCell *)setCell:(UITableViewCell *)cell withItem:(id)item;
 
 /*! Define data that should by shown by autocomplete on substring. Can be any object. Not only NSString.
  /param substring
  /return array of objects for substring
  */
-- (NSArray *) getItemsArrayWithSubstring:(NSString *) substring;
+- (NSArray *)getItemsArrayWithSubstring:(NSString *) substring;
+
+@end
+
+
+/*! Protocol for manipulation with VJAutocomplete
+ */
+@protocol VJAutocompleteDelegate <NSObject>
+
+@optional
+/*! This is called when row was selected and autocomplete add text to text field.
+ /param rowIndex Selected row number
+ /return array of objects for substring
+ */
+- (void)autocompleteWasSelectedRow:(NSInteger) rowIndex;
 
 @end
 
@@ -73,6 +87,7 @@
 @property (nonatomic) NSUInteger minCountOfCharsToShow; //!< Minimum count of characters needed to show autocomplete
 
 @property(nonatomic,assign) id<VJAutocompleteDataSource> autocompleteDataSource; //!< Manipulation with data
+@property(nonatomic,assign) id<VJAutocompleteDelegate> autocompleteDelegate; //!< Manipulation with autocomplete
 
 // -------------------------------------------------------------------------------
 #pragma mark - Public methods

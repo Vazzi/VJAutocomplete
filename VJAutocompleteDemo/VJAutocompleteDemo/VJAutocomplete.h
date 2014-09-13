@@ -65,9 +65,6 @@
 @property (weak, nonatomic) UITextField *textField; //!< Given text field. To this text field is autocomplete pinned to.
 @property (weak, nonatomic) UIView *parentView; //!< Parent view of text field (Change only if the current view is not what you want)
 
-// Readonly properties
-@property (nonatomic) BOOL isVisible; //!< Is autocomplete visible? (Only informative. Do not set.)
-
 // Actions properties
 @property (nonatomic) BOOL doNotShow; //!< Do not show autocomplete
 
@@ -112,6 +109,11 @@
  */
 - (void)shouldChangeCharactersInRange:(NSRange)range
                     replacementString:(NSString *)string;
+
+/*! Is autocomplete visible?
+ \return boolean
+ */
+- (BOOL)isAutocompleteVisible;
 
 
 @end

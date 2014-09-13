@@ -50,6 +50,7 @@
 @property (nonatomic) NSString *lastSubstring; //!< Last given substring
 @property (strong, atomic) NSMutableArray *autocompleteItemsArray; //!< Current suggestions
 @property (nonatomic) dispatch_queue_t autocompleteSearchQueue; //!< Queue for searching suggestions
+@property (nonatomic) BOOL isVisible; //<! Is autocomplete visible
 
 @end
 
@@ -223,6 +224,10 @@
     [self searchAutocompleteEntriesWithSubstring:substring];
 }
 
+- (BOOL)isAutocompleteVisible
+{
+    return self.isVisible;
+}
 
 // -------------------------------------------------------------------------------
 #pragma mark - UITableView data source

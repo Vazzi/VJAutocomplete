@@ -60,6 +60,8 @@
     self.mainAutocomplete.minCountOfCharsToShow = 1;
     // Set maximum of visible rows
     self.mainAutocomplete.maxVisibleRowsCount = 2;
+    // Set cell height
+    self.mainAutocomplete.cellHeight = 32;
 }
 
 // -------------------------------------------------------------------------------
@@ -103,6 +105,8 @@ replacementString:(NSString *)string
 - (UITableViewCell *) setCell:(UITableViewCell *)cell withItem:(id)item
 {
     [cell.textLabel setText:(NSString *)item];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:15.0]];
+    
     return cell;
 }
 

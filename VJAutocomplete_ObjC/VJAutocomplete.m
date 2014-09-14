@@ -197,7 +197,7 @@
         visibleRowsCount = self.maxVisibleRowsCount;
     }
     // Calculate autocomplete height
-    CGFloat height = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT * visibleRowsCount;
+    CGFloat height = self.cellHeight * visibleRowsCount;
     
     // Set origin of autocomplete by TextField position
     CGPoint textViewOrigin;

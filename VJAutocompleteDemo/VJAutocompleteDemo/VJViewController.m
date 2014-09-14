@@ -62,6 +62,8 @@
     self.mainAutocomplete.maxVisibleRowsCount = 2;
     // Set cell height
     self.mainAutocomplete.cellHeight = 32;
+    // Set border
+    [self.mainAutocomplete setBorderWidth:1.5f cornerRadius:8.0f color:[UIColor groupTableViewBackgroundColor]];
 }
 
 // -------------------------------------------------------------------------------

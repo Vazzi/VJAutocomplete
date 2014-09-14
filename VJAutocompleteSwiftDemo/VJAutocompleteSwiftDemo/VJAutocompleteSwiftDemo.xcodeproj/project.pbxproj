@@ -77,11 +77,9 @@
 		7DAC38CD19C59F780023853B /* VJAutocompleteSwiftDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7DAC38D019C59F780023853B /* AppDelegate.swift */,
-				7DAC38D219C59F780023853B /* ViewController.swift */,
-				7DAC38D419C59F780023853B /* Main.storyboard */,
-				7DAC38D719C59F780023853B /* Images.xcassets */,
-				7DAC38D919C59F780023853B /* LaunchScreen.xib */,
+				7DAC38F019C5A0120023853B /* Model */,
+				7DAC38F219C5A01E0023853B /* View */,
+				7DAC38F119C5A0170023853B /* Controller */,
 				7DAC38CE19C59F780023853B /* Supporting Files */,
 			);
 			path = VJAutocompleteSwiftDemo;
@@ -90,6 +88,8 @@
 		7DAC38CE19C59F780023853B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7DAC38D719C59F780023853B /* Images.xcassets */,
+				7DAC38D019C59F780023853B /* AppDelegate.swift */,
 				7DAC38CF19C59F780023853B /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +110,30 @@
 				7DAC38E519C59F790023853B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7DAC38F019C5A0120023853B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7DAC38F119C5A0170023853B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7DAC38D219C59F780023853B /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		7DAC38F219C5A01E0023853B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7DAC38D919C59F780023853B /* LaunchScreen.xib */,
+				7DAC38D419C59F780023853B /* Main.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

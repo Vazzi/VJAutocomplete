@@ -75,6 +75,8 @@
         self.maxVisibleRowsCount = VJAUTOCOMPLETE_DEFAULT_MAX_VISIBLE_ROWS;
         // Minimum characters
         self.minCountOfCharsToShow = VJAUTOCOMPLETE_DEFAULT_MIN_CHARS;
+        
+        self.cellHeight = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
         // Setup table view
         [self setupTableView];
         // Init data array
@@ -229,6 +231,7 @@
     return self.isVisible;
 }
 
+
 // -------------------------------------------------------------------------------
 #pragma mark - UITableView data source
 // -------------------------------------------------------------------------------
@@ -243,7 +246,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VJAUTOCOMPLETE_CELL_IDENTIFIER];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:VJAUTOCOMPLETE_CELL_IDENTIFIER];
     }
     
@@ -268,6 +271,11 @@
     // Call delegate method
     [self.autocompleteDelegate autocompleteWasSelectedRow:indexPath.row];
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.cellHeight;
 }
 
 

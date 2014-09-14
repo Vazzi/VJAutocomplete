@@ -84,6 +84,7 @@
 
 // Other properties
 @property (nonatomic) NSUInteger maxVisibleRowsCount; //!< Maximum height of autocomplete based on max visible rows
+@property (nonatomic) NSUInteger cellHeight; //!< Cell height
 @property (nonatomic) NSUInteger minCountOfCharsToShow; //!< Minimum count of characters needed to show autocomplete
 
 @property(nonatomic,assign) id<VJAutocompleteDataSource> autocompleteDataSource; //!< Manipulation with data

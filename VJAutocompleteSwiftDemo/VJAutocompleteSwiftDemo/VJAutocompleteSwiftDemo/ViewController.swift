@@ -10,9 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+   // Outlets
+    @IBOutlet weak var mainTextField: UITextField!
+    
+    
+    // -------------------------------------------------------------------------------
+    // MARK - Lifecycle
+    // -------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        mainTextField.becomeFirstResponder()
+        
     }
 
     override func didReceiveMemoryWarning() {

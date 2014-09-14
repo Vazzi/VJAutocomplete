@@ -429,6 +429,7 @@
 				7DAC38EC19C59F790023853B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7DAC38ED19C59F790023853B /* Build configuration list for PBXNativeTarget "VJAutocompleteSwiftDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +438,7 @@
 				7DAC38EF19C59F790023853B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

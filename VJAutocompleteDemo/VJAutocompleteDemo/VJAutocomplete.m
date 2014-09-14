@@ -105,11 +105,6 @@
     self.backgroundColor = [UIColor whiteColor];
     self.rowHeight = VJAUTOCOMPLETE_DEFAULT_CELL_HEIGHT;
     
-    // Border
-    self.layer.cornerRadius = 8.0f;
-    self.layer.borderWidth = 1.5f;
-    self.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
-    
     // Empty footer
     self.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
@@ -118,6 +113,17 @@
 // -------------------------------------------------------------------------------
 #pragma mark - Public methods
 // -------------------------------------------------------------------------------
+
+- (void)setBorderWidth:(CGFloat)borderWidth
+          cornerRadius:(CGFloat)cornerRadius
+                 color:(UIColor *)color
+{
+    self.layer.borderWidth = borderWidth;
+    self.layer.cornerRadius = cornerRadius;
+    self.layer.borderColor = [color CGColor];
+    
+}
+
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring
 {

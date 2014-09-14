@@ -93,6 +93,10 @@
 // -------------------------------------------------------------------------------
 #pragma mark - Public methods
 // -------------------------------------------------------------------------------
+//! Setup border of autocomplete
+- (void)setBorderWidth:(CGFloat)borderWidth
+          cornerRadius:(CGFloat)cornerRadius
+                 color:(UIColor *)color;
 
 /*! Initialize autocomplete with text field.
  \param textField UITextField that autocomplete is pinned to

@@ -28,6 +28,8 @@
 
 import UIKit
 
+/*! Protocol for manipulation with data
+*/
 protocol VJAutocompleteDataSource {
     /*! Set the text of cell with given data. Data can be any object not only string.
     Always return the parameter cell. Only set text. ([cell.textLabel setText:])
@@ -42,5 +44,16 @@ protocol VJAutocompleteDataSource {
     /return array of objects for substring
     */
     func getItemsArrayWithSubstring(substring:String) -> [AnyObject]
+    
+}
+
+/*! Protocol for manipulation with VJAutocomplete
+*/
+protocol VJAutocompleteDelegate {
+    
+    /*! This is called when row was selected and autocomplete add text to text field.
+    /param rowIndex Selected row number
+    */
+    func autocompleteWasSelectedRow(rowIndex: Int)
     
 }

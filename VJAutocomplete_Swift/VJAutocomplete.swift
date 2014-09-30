@@ -47,6 +47,7 @@ protocol VJAutocompleteDataSource {
     
 }
 
+
 /*! Protocol for manipulation with VJAutocomplete
 */
 protocol VJAutocompleteDelegate {
@@ -56,4 +57,36 @@ protocol VJAutocompleteDelegate {
     */
     func autocompleteWasSelectedRow(rowIndex: Int)
     
+}
+
+
+/*! VJAutocomplete table for text field is pinned to the text field that must be given. User starts
+ writing to the text field and VJAutocomplete show if has any suggestion. If there is no
+ suggestion then hide. User can choose suggestion by clicking on it. If user choose any suggestion
+ then it diseppeared and add text to text field. If user continues adding text then
+ VJAutocomplete start showing another suggestions or diseppead if has no.
+*/
+class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
+
+    
+    // -------------------------------------------------------------------------------
+    // MARK: - Public properties
+    // -------------------------------------------------------------------------------
+    
+    // Set by init
+    var textField: UITextField! //!< Given text field. To this text field is autocomplete pinned to.
+    var parentView: UIView? //!< Parent view of text field (Change only if the current view is not what you want)
+    
+    // Actions properties
+    var doNotShow = true //!< Do not show autocomplete
+    
+    // Other properties
+    var maxVisibleRowsCount:UInt = 2 //!< Maximum height of autocomplete based on max visible rows
+    var cellHeight:UInt = 44 //!< Cell height
+    var minCountOfCharsToShow:UInt = 3 //!< Minimum count of characters needed to show autocomplete
+    
+    var autocompleteDataSource:VJAutocompleteDataSource? //!< Manipulation with data
+    var autocompleteDelegate:VJAutocompleteDelegate? //!< Manipulation with autocomplete
+
+
 }

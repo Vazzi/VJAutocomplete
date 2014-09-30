@@ -61,13 +61,13 @@ protocol VJAutocompleteDelegate {
 
 
 /*! VJAutocomplete table for text field is pinned to the text field that must be given. User starts
- writing to the text field and VJAutocomplete show if has any suggestion. If there is no
- suggestion then hide. User can choose suggestion by clicking on it. If user choose any suggestion
- then it diseppeared and add text to text field. If user continues adding text then
- VJAutocomplete start showing another suggestions or diseppead if has no.
+writing to the text field and VJAutocomplete show if has any suggestion. If there is no
+suggestion then hide. User can choose suggestion by clicking on it. If user choose any suggestion
+then it diseppeared and add text to text field. If user continues adding text then
+VJAutocomplete start showing another suggestions or diseppead if has no.
 */
 class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     // -------------------------------------------------------------------------------
     // MARK: - Public properties
@@ -87,6 +87,17 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     var autocompleteDataSource:VJAutocompleteDataSource? //!< Manipulation with data
     var autocompleteDelegate:VJAutocompleteDelegate? //!< Manipulation with autocomplete
-
-
+    
+    
+    // -------------------------------------------------------------------------------
+    // MARK: - Private properties
+    // -------------------------------------------------------------------------------
+    private let cellIdentifier = "VJAutocompleteCellIdentifier"
+    private var lastSubstring:String = "" //!< Last given substring
+    private var autocompleteItemsArray = [] //!< Current suggestions
+    private var autocompleteSearchQueue = dispatch_queue_create("VJAutocompleteQueue",
+        DISPATCH_QUEUE_SERIAL); //!< Queue for searching suggestions
+    private var isVisible = false //<! Is autocomplete visible
+    
+    
 }

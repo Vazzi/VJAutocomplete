@@ -99,7 +99,47 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         DISPATCH_QUEUE_SERIAL); //!< Queue for searching suggestions
     private var isVisible = false //<! Is autocomplete visible
     
+    // -------------------------------------------------------------------------------
+    // MARK: - Init methods
+    // -------------------------------------------------------------------------------
     
+    init(textField: UITextField) {
+        super.init()
+        
+        // Text field
+        self.textField = textField;
+        // Set parent view as text field super view
+        self.parentView = textField.superview;
+        // Setup table view
+        setupTableView()
+    }
+
+    required init(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // -------------------------------------------------------------------------------
+    // MARK: - Setups
+    // -------------------------------------------------------------------------------
+    private func setupTableView() {
+        
+        // Protocols
+        dataSource = self;
+        delegate = self;
+        
+        // Properties
+        scrollEnabled = true;
+        
+        // Visual properties
+        backgroundColor = UIColor.whiteColor();
+        rowHeight = cellHeight;
+        
+        // Empty footer
+        tableFooterView = UIView(frame: CGRectZero);
+        
+    }
     
     // -------------------------------------------------------------------------------
     // MARK: - UITableView data source
@@ -126,7 +166,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         // Set text to
         textField.text = selectedCell?.textLabel?.text
         // Hide self
-       // hideAutocomplete()
+        // hideAutocomplete()
         // Call delegate method
         autocompleteDelegate?.autocompleteWasSelectedRow(indexPath.row)
     }

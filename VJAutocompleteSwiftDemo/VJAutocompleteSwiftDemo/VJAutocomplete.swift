@@ -98,6 +98,21 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     private var autocompleteSearchQueue = dispatch_queue_create("VJAutocompleteQueue",
         DISPATCH_QUEUE_SERIAL); //!< Queue for searching suggestions
     private var isVisible = false //<! Is autocomplete visible
+   
+    // -------------------------------------------------------------------------------
+    // MARK: - UITableView data source
+    // -------------------------------------------------------------------------------
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return autocompleteItemsArray.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as  UITableViewCell
+        
+        var newCell = autocompleteDataSource?.setCell(cell, withItem: autocompleteItemsArray[indexPath.row])
+        return cell
+    }
     
     
 }

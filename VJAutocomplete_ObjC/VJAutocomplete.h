@@ -28,7 +28,7 @@
 
 #import <UIKit/UIKit.h>
 
-/*! Protocol for manipulation of data
+/*! Protocol for manipulation for data
  */
 @protocol VJAutocompleteDataSource <NSObject>
 
@@ -56,7 +56,6 @@
 @optional
 /*! This is called when row was selected and autocomplete add text to text field.
  /param rowIndex Selected row number
- /return array of objects for substring
  */
 - (void)autocompleteWasSelectedRow:(NSInteger) rowIndex;
 

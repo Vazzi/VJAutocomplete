@@ -82,7 +82,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     // Other properties
     var maxVisibleRowsCount:UInt = 2 //!< Maximum height of autocomplete based on max visible rows
-    var cellHeight:UInt = 44 //!< Cell height
+    var cellHeight:CGFloat = 44.0 //!< Cell height
     var minCountOfCharsToShow:UInt = 3 //!< Minimum count of characters needed to show autocomplete
     
     var autocompleteDataSource:VJAutocompleteDataSource? //!< Manipulation with data
@@ -98,7 +98,9 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     private var autocompleteSearchQueue = dispatch_queue_create("VJAutocompleteQueue",
         DISPATCH_QUEUE_SERIAL); //!< Queue for searching suggestions
     private var isVisible = false //<! Is autocomplete visible
-   
+    
+    
+    
     // -------------------------------------------------------------------------------
     // MARK: - UITableView data source
     // -------------------------------------------------------------------------------
@@ -112,6 +114,25 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         
         var newCell = autocompleteDataSource?.setCell(cell, withItem: autocompleteItemsArray[indexPath.row])
         return cell
+    }
+    
+    // -------------------------------------------------------------------------------
+    // MARK: - UITableView delegate
+    // -------------------------------------------------------------------------------
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // Get the cell
+        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+        // Set text to
+        textField.text = selectedCell?.textLabel?.text
+        // Hide self
+       // hideAutocomplete()
+        // Call delegate method
+        autocompleteDelegate?.autocompleteWasSelectedRow(indexPath.row)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
     }
     
     

@@ -153,6 +153,33 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         self.layer.borderColor = color.CGColor;
     }
     
+    func hideAutocomplete() {
+        if (!isVisible) {
+            return;
+        }
+        removeFromSuperview();
+        isVisible = false;
+    }
+    
+    func showAutocomplete() {
+        if (doNotShow) {
+            return;
+        }
+        
+        if (isVisible) {
+            removeFromSuperview();
+        }
+        self.isVisible = true;
+        
+        var origin = getTextViewOrigin();
+        setFrame(origin, height: computeHeight());
+
+        layer.zPosition = CGFloat.max;
+        
+        parentView?.addSubview(self);
+        
+    }
+    
     
     // -------------------------------------------------------------------------------
     // MARK: - UITableView data source
@@ -179,8 +206,6 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         // Set text to
         textField.text = selectedCell?.textLabel.text
-        // Hide self
-        // hideAutocomplete()
         // Call delegate method
         autocompleteDelegate?.autocompleteWasSelectedRow(indexPath.row)
     }
@@ -189,5 +214,40 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         return cellHeight
     }
     
+
+    // -------------------------------------------------------------------------------
+    // MARK: - Private
+    // -------------------------------------------------------------------------------
     
+    private func computeHeight() -> CGFloat {
+        // Set number of cells (do not show more than maxSuggestions)
+        var visibleRowsCount = autocompleteItemsArray.count as NSInteger;
+        if (visibleRowsCount > NSInteger(maxVisibleRowsCount)) {
+            visibleRowsCount = NSInteger(maxVisibleRowsCount);
+        }
+        // Calculate autocomplete height
+        let height = cellHeight * CGFloat(visibleRowsCount);
+        
+        return height;
+    }
+    
+    private func getTextViewOrigin() -> CGPoint {
+        var textViewOrigin: CGPoint;
+        if (parentView?.isEqual(textField.superview) != nil) {
+            textViewOrigin = textField.frame.origin;
+        } else {
+            textViewOrigin = textField.convertPoint(textField.frame.origin,
+                toView: parentView);
+        }
+        return textViewOrigin;
+    }
+
+    private func setFrame(textViewOrigin: CGPoint, height: CGFloat) {
+        var newFrame = CGRectMake(textViewOrigin.x, textViewOrigin.y,
+            CGRectGetHeight(textField.bounds), CGRectGetWidth(textField.bounds));
+        frame = newFrame;
+    }
+
+
 }
+

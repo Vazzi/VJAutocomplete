@@ -93,7 +93,6 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Private properties
     // -------------------------------------------------------------------------------
     private let cellIdentifier = "VJAutocompleteCellIdentifier"
-    private var lastSubstring:String = "" //!< Last given substring
     private var autocompleteItemsArray = [AnyObject]() //!< Current suggestions
     private var autocompleteSearchQueue = dispatch_queue_create("VJAutocompleteQueue",
         DISPATCH_QUEUE_SERIAL); //!< Queue for searching suggestions
@@ -151,20 +150,11 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func searchAutocompleteEntries(WithSubstring substring: NSString) {
-        let lastCount = autocompleteItemsArray.count;
         autocompleteItemsArray.removeAll(keepCapacity: false);
         
         // If substring has less than min. characters then hide and return
-        if (substring.length < Int(minCountOfCharsToShow)) {
+        if (UInt(substring.length) < minCountOfCharsToShow) {
             hideAutocomplete();
-            return;
-        }
-        
-        let substringBefore = lastSubstring;
-        lastSubstring = substring;
-        // If substring is the same as before and before it has no suggestions then
-        // do not search for suggestions
-        if (substringBefore == substring.substringToIndex(substring.length - 1) && lastCount == 0) {
             return;
         }
 

@@ -102,10 +102,10 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     // -------------------------------------------------------------------------------
     // MARK: - Init methods
     // -------------------------------------------------------------------------------
+
     
     init(textField: UITextField) {
-        super.init()
-        
+        super.init(frame: CGRectZero, style: UITableViewStyle.Plain);
         // Text field
         self.textField = textField;
         // Set parent view as text field super view
@@ -114,18 +114,15 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         setupTableView()
     }
 
-    required init(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder);
     }
-    
     
     // -------------------------------------------------------------------------------
     // MARK: - Setups
     // -------------------------------------------------------------------------------
     
     private func setupTableView() {
-        
         // Protocols
         dataSource = self;
         delegate = self;

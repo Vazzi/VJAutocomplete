@@ -78,7 +78,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     var parentView: UIView? //!< Parent view of text field (Change only if the current view is not what you want)
     
     // Actions properties
-    var doNotShow = true //!< Do not show autocomplete
+    var doNotShow = false //!< Do not show autocomplete
     
     // Other properties
     var maxVisibleRowsCount:UInt = 2 //!< Maximum height of autocomplete based on max visible rows
@@ -102,10 +102,9 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     // -------------------------------------------------------------------------------
     // MARK: - Init methods
     // -------------------------------------------------------------------------------
-
     
     init(textField: UITextField) {
-        super.init(frame: CGRectZero, style: UITableViewStyle.Plain);
+        super.init(frame: textField.frame, style: UITableViewStyle.Plain);
         // Text field
         self.textField = textField;
         // Set parent view as text field super view
@@ -117,6 +116,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
     }
+    
     
     // -------------------------------------------------------------------------------
     // MARK: - Setups
@@ -216,7 +216,6 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     func shouldChangeCharacters(InRange range: NSRange, replacementString string: NSString) {
         var substring = NSString(string: textField.text);
-        
         substring = substring.stringByReplacingCharactersInRange(range, withString: string);
         searchAutocompleteEntries(WithSubstring: substring);
     }
@@ -235,7 +234,12 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as  UITableViewCell
+        var cell:UITableViewCell!;
+        if let oldCell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell {
+            cell = oldCell;
+        } else {
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier);
+        }
         
         var newCell = autocompleteDataSource?.setCell(cell, withItem: autocompleteItemsArray[indexPath.row])
         return cell
@@ -288,8 +292,8 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
 
     private func setFrame(textViewOrigin: CGPoint, height: CGFloat) {
-        var newFrame = CGRectMake(textViewOrigin.x, textViewOrigin.y,
-            CGRectGetHeight(textField.bounds), CGRectGetWidth(textField.bounds));
+        var newFrame = CGRectMake(textViewOrigin.x, textViewOrigin.y + CGRectGetHeight(textField.bounds),
+            CGRectGetWidth(textField.bounds), height);
         frame = newFrame;
     }
 

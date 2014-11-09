@@ -180,6 +180,10 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func isAutocompleteVisible() -> Bool {
+        return isVisible;
+    }
+    
     
     // -------------------------------------------------------------------------------
     // MARK: - UITableView data source

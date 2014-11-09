@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocompleteDelegate {
+class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocompleteDelegate, UITextFieldDelegate {
     
     
     // -------------------------------------------------------------------------------
@@ -75,6 +75,29 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
         mainTextField.resignFirstResponder();
     }
     
+    // -------------------------------------------------------------------------------
+    // MARK - UITextField delegate
+    // -------------------------------------------------------------------------------
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        mainAutocomplete .shouldChangeCharacters(InRange: range, replacementString: string);
+        return true;
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        mainAutocomplete.hideAutocomplete();
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder();
+        mainAutocomplete.hideAutocomplete();
+        return true;
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        mainAutocomplete.hideAutocomplete();
+        return true;
+    }
     
     // -------------------------------------------------------------------------------
     // MARK - Private methods

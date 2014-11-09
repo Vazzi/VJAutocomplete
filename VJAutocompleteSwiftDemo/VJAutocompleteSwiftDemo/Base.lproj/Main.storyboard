@@ -34,6 +34,9 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="njC-Oy-nLZ"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.3169149061" green="0.68120210650000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>

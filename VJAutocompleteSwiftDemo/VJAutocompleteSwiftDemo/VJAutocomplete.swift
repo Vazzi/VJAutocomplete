@@ -123,6 +123,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
     // -------------------------------------------------------------------------------
     // MARK: - Setups
     // -------------------------------------------------------------------------------
+    
     private func setupTableView() {
         
         // Protocols
@@ -141,6 +142,18 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
+    // -------------------------------------------------------------------------------
+    // MARK: - Public methods
+    // -------------------------------------------------------------------------------
+    
+    func setBorder(width: CGFloat, cornerRadius: CGFloat, color: UIColor) {
+        self.layer.borderWidth = width;
+        self.layer.cornerRadius = cornerRadius;
+        self.layer.borderColor = color.CGColor;
+    }
+    
+    
     // -------------------------------------------------------------------------------
     // MARK: - UITableView data source
     // -------------------------------------------------------------------------------
@@ -156,6 +169,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
     // -------------------------------------------------------------------------------
     // MARK: - UITableView delegate
     // -------------------------------------------------------------------------------
@@ -164,7 +178,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         // Get the cell
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         // Set text to
-        textField.text = selectedCell?.textLabel?.text
+        textField.text = selectedCell?.textLabel.text
         // Hide self
         // hideAutocomplete()
         // Call delegate method

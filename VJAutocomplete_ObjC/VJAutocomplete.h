@@ -106,7 +106,7 @@
  If anything is similar to given text then add it to suggestions.
  Then show self if there are any suggestions or hide if there
  is none. Then reload data in table. Get the suggestins with VJAutocompleteDataSource
- and it is done by on background thread.
+ (on backgound thread).
  \param substring
  */
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring;
@@ -129,9 +129,6 @@
 - (void)shouldChangeCharactersInRange:(NSRange)range
                     replacementString:(NSString *)string;
 
-/*! Is autocomplete visible?
- \return boolean
- */
 - (BOOL)isAutocompleteVisible;
 
 

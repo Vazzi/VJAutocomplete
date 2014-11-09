@@ -14,7 +14,7 @@
 #import "VJCountry.h"
 
 
-@interface VJViewController () <VJAutocompleteDataSource, VJAutocompleteDelegate>
+@interface VJViewController () <VJAutocompleteDataSource, VJAutocompleteDelegate, UITextViewDelegate>
 
 // Private properties
 @property (strong, nonatomic) NSArray *sourceDataArray;

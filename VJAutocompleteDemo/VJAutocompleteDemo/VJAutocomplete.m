@@ -121,37 +121,32 @@
     self.layer.borderWidth = borderWidth;
     self.layer.cornerRadius = cornerRadius;
     self.layer.borderColor = [color CGColor];
-    
 }
 
 
 - (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring
 {
-    // Last count of items in array
     NSUInteger const lastCount = [self.autocompleteItemsArray count];
-    // Remove objects from array
     [self.autocompleteItemsArray removeAllObjects];
     
-    // If substring has less than 3 characters then hide and return
+    // If substring has less than min. characters then hide and return
     if ( [substring length] < self.minCountOfCharsToShow) {
         [self hideAutocomplete];
         return;
     }
     
-    // If substring is the same as before and before it has no suggestions then
-    // do not search for suggestions
-    if ([self.lastSubstring isEqualToString:[substring substringToIndex:substring.length - 1]]) {
-        if ( lastCount == 0 ) {
-            self.lastSubstring = substring;
-            return;
-        }
-    }
-    
-    // Save as last substring
+    NSString *substringBefore = self.lastSubstring;
     self.lastSubstring = substring;
     
-    __weak __typeof__(self) blockSelf = self;
+    // If substring is the same as before and before it has no suggestions then
+    // do not search for suggestions
+    if ([substringBefore isEqualToString:[substring substringToIndex:substring.length - 1]] &&
+        lastCount == 0 &&
+        ![substringBefore isEqualToString:@""]) {
+        return;
+    }
     
+    __weak __typeof__(self) blockSelf = self;
     dispatch_async(self.autocompleteSearchQueue, ^(void) {
         // Save new suggestions
         blockSelf.autocompleteItemsArray =  [[NSMutableArray alloc]
@@ -171,7 +166,6 @@
         });
         
     });
-    
 }
 
 - (void)hideAutocomplete
@@ -185,7 +179,6 @@
 
 - (void)showAutocomplete
 {
-    
     if ( self.doNotShow ) {
         return;
     }
@@ -196,28 +189,10 @@
     
     self.isVisible = YES;
     
-    NSInteger visibleRowsCount = [self.autocompleteItemsArray count];
     
-    // Set number of cells (do not show more than maxSuggestions)
-    if ([self.autocompleteItemsArray count] > self.maxVisibleRowsCount) {
-        visibleRowsCount = self.maxVisibleRowsCount;
-    }
-    // Calculate autocomplete height
-    CGFloat height = self.cellHeight * visibleRowsCount;
-    
-    // Set origin of autocomplete by TextField position
-    CGPoint textViewOrigin;
-    if ([self.parentView isEqual:self.textField.superview]) {
-        textViewOrigin = self.textField.frame.origin;
-    } else {
-        textViewOrigin = [self.textField convertPoint:self.textField.frame.origin
-                                               toView:self.parentView];
-    }
-    
-    // Set frame of autocomplete
-    CGRect newFrame = CGRectMake(textViewOrigin.x, textViewOrigin.y + CGRectGetHeight(self.textField.bounds), CGRectGetWidth(self.textField.bounds), height);
-    self.frame = newFrame;
-    // Show in front of everything
+    CGPoint origin = [self getTextViewOrigin];
+    [self setFrameWithTextViewOrigin:origin andHeight:[self computeHeight]];
+
     self.layer.zPosition = MAXFLOAT;
     
     [self.parentView addSubview:self];
@@ -284,6 +259,47 @@
     return self.cellHeight;
 }
 
+
+
+// -------------------------------------------------------------------------------
+#pragma mark - Private methods
+// -------------------------------------------------------------------------------
+
+- (CGFloat)computeHeight
+{
+    NSInteger visibleRowsCount = [self.autocompleteItemsArray count];
+
+    // Set number of cells (do not show more than maxSuggestions)
+    if ([self.autocompleteItemsArray count] > self.maxVisibleRowsCount) {
+        visibleRowsCount = self.maxVisibleRowsCount;
+    }
+
+    CGFloat height = self.cellHeight * visibleRowsCount;
+    return height;
+}
+
+- (CGPoint)getTextViewOrigin
+{
+    // Set origin of autocomplete by TextField position
+    CGPoint textViewOrigin;
+    if ([self.parentView isEqual:self.textField.superview]) {
+        textViewOrigin = self.textField.frame.origin;
+    } else {
+        textViewOrigin = [self.textField convertPoint:self.textField.frame.origin
+                                               toView:self.parentView];
+    }
+    return textViewOrigin;
+}
+
+- (void)setFrameWithTextViewOrigin:(CGPoint)origin andHeight:(CGFloat) height
+{
+    // Set frame of autocomplete
+    CGRect newFrame = CGRectMake(origin.x,
+                                 origin.y + CGRectGetHeight(self.textField.bounds),
+                                 CGRectGetWidth(self.textField.bounds),
+                                 height);
+    self.frame = newFrame;
+}
 
 @end
 

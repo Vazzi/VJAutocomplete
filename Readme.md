@@ -8,7 +8,7 @@ About
 --------
 It is a basic autocomplete that helps user with writing. Very simmilar to classic web autocompletes.
 
-Written in Objective-C (Swift comming soon).
+Written in Objective-C and Swift. You can choose which one to use.
 
 
 How it works

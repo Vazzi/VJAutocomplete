@@ -161,7 +161,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         }
         
         let substringBefore = lastSubstring;
-        lastSubstring = substring;
+        lastSubstring = substring as String;
         // If substring is the same as before and before it has no suggestions then
         // do not search for suggestions
         if (substringBefore == substring.substringToIndex(substring.length - 1) &&
@@ -172,7 +172,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
 
         dispatch_async(autocompleteSearchQueue) { ()
             // Save new suggestions
-            if let dataArray = self.autocompleteDataSource?.getItemsArrayWithSubstring(substring) {
+            if let dataArray = self.autocompleteDataSource?.getItemsArrayWithSubstring(substring as String) {
                 self.autocompleteItemsArray = dataArray;
             }
             // Call show or hide autocomplete and reload data on main thread
@@ -210,13 +210,13 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         var origin = getTextViewOrigin();
         setFrame(origin, height: computeHeight());
 
-        layer.zPosition = CGFloat.max;
+        layer.zPosition = CGFloat(FLT_MAX);
         
         parentView?.addSubview(self);
         
     }
     
-    func shouldChangeCharacters(InRange range: NSRange, replacementString string: NSString) {
+    func shouldChangeCharacters(InRange range: NSRange, replacementString string: String) {
         var substring = NSString(string: textField.text);
         substring = substring.stringByReplacingCharactersInRange(range, withString: string);
         searchAutocompleteEntries(WithSubstring: substring);
@@ -256,7 +256,7 @@ class VJAutocomplete: UITableView, UITableViewDelegate, UITableViewDataSource {
         // Get the cell
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         // Set text to
-        textField.text = selectedCell?.textLabel.text
+        textField.text = selectedCell?.textLabel!.text
         // Call delegate method
         autocompleteDelegate?.autocompleteWasSelectedRow(indexPath.row)
     }

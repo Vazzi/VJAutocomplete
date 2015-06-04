@@ -55,14 +55,14 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     // -------------------------------------------------------------------------------
     
     func setCell(cell: UITableViewCell, withItem item: AnyObject) -> UITableViewCell {
-        cell.textLabel.text = item as NSString;
-        cell.textLabel.font = UIFont.systemFontOfSize(15.0);
+        cell.textLabel!.text = item as? String;
+        cell.textLabel!.font = UIFont.systemFontOfSize(15.0);
         return cell;
     }
     
     func getItemsArrayWithSubstring(substring: String) -> [AnyObject] {
         let beginsWithPredicate = NSPredicate(format: "SELF beginswith[c] %@", substring);
-        var searchedCountriesArray  = (sourceDataArray as NSArray).filteredArrayUsingPredicate(beginsWithPredicate!);
+        var searchedCountriesArray  = (sourceDataArray as NSArray).filteredArrayUsingPredicate(beginsWithPredicate);
         return searchedCountriesArray;
     }
     

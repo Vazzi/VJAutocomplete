@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -38,22 +38,35 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="njC-Oy-nLZ"/>
                                 </connections>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-05-8Fp">
+                                <rect key="frame" x="98" y="189" width="486" height="30"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="mJu-bB-5TQ"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.3169149061" green="0.68120210650000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="esz-yC-UEv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="16" id="6x4-C5-Wh8"/>
+                            <constraint firstItem="VhB-05-8Fp" firstAttribute="top" secondItem="dw1-vn-TkI" secondAttribute="bottom" constant="23" id="Lph-4W-6rE"/>
                             <constraint firstItem="esz-yC-UEv" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="RrX-Lg-WVM"/>
                             <constraint firstItem="dw1-vn-TkI" firstAttribute="centerY" secondItem="yIM-Sr-mcS" secondAttribute="centerY" id="aeg-GG-SZh"/>
+                            <constraint firstItem="VhB-05-8Fp" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="82" id="cb4-hu-h3Z"/>
                             <constraint firstAttribute="trailing" secondItem="dw1-vn-TkI" secondAttribute="trailing" constant="16" id="cf4-Kn-rpm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="esz-yC-UEv" secondAttribute="trailing" constant="16" id="e7e-XK-AIs"/>
                             <constraint firstItem="yIM-Sr-mcS" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="8" id="eTH-TE-RxI"/>
+                            <constraint firstItem="VhB-05-8Fp" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="pKn-xG-dVX"/>
                             <constraint firstItem="dw1-vn-TkI" firstAttribute="leading" secondItem="yIM-Sr-mcS" secondAttribute="trailing" constant="8" id="tUI-KD-Pbq"/>
                             <constraint firstItem="dw1-vn-TkI" firstAttribute="top" secondItem="esz-yC-UEv" secondAttribute="bottom" constant="40" id="z8X-C0-EOP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mainTextField" destination="dw1-vn-TkI" id="qRn-as-7Dr"/>
+                        <outlet property="secondTextField" destination="VhB-05-8Fp" id="qJP-kp-nfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

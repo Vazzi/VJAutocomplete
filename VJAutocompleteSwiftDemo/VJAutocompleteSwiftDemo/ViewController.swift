@@ -18,6 +18,7 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     
     // Outlets
     @IBOutlet weak var mainTextField: UITextField!
+    @IBOutlet weak var secondTextField: UITextField!
     
     
     // -------------------------------------------------------------------------------
@@ -25,7 +26,7 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     // -------------------------------------------------------------------------------
     var sourceDataArray = [AnyObject]();
     var mainAutocomplete: VJAutocomplete!;
-    
+    var secAutocomplete: VJAutocomplete!;
     
     // -------------------------------------------------------------------------------
     // MARK - Lifecycle
@@ -36,11 +37,14 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
         
         sourceDataArray = Country.listOfCountries();
         
+        
+        mainTextField.tag = 0;
+        secondTextField.tag = 1;
+        
         // Initialize it with initWithTextField is recomended
         mainAutocomplete = VJAutocomplete(textField: mainTextField);
+        secAutocomplete = VJAutocomplete(textField: secondTextField);
         setupAutocomplete();
-        
-        mainTextField.becomeFirstResponder()
         
     }
 
@@ -73,6 +77,7 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     
     func autocompleteWasSelectedRow(rowIndex: Int) {
         mainTextField.resignFirstResponder();
+        secondTextField.resignFirstResponder();
     }
     
     // -------------------------------------------------------------------------------
@@ -80,23 +85,50 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     // -------------------------------------------------------------------------------
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        mainAutocomplete .shouldChangeCharacters(InRange: range, replacementString: string);
+        
+        if textField.tag == 0 {
+            mainAutocomplete.shouldChangeCharacters(InRange: range, replacementString: string);
+        } else {
+            secAutocomplete.shouldChangeCharacters(InRange: range, replacementString: string);
+        }
+        
         return true;
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        mainAutocomplete.hideAutocomplete();
+        if textField.tag == 0 {
+            mainAutocomplete.hideAutocomplete();
+        } else {
+            secAutocomplete.hideAutocomplete();
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder();
-        mainAutocomplete.hideAutocomplete();
+        
+        if textField.tag == 0 {
+            mainAutocomplete.hideAutocomplete();
+        } else {
+            secAutocomplete.hideAutocomplete();
+        }
         return true;
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
-        mainAutocomplete.hideAutocomplete();
+        if textField.tag == 0 {
+            mainAutocomplete.hideAutocomplete();
+        } else {
+            secAutocomplete.hideAutocomplete();
+        }
         return true;
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField.tag == 0{
+            mainTextField.becomeFirstResponder();
+        }else{
+            secondTextField.becomeFirstResponder();
+        }
     }
     
     // -------------------------------------------------------------------------------
@@ -104,18 +136,19 @@ class ViewController: UIViewController, VJAutocompleteDataSource, VJAutocomplete
     // -------------------------------------------------------------------------------
     
     private func setupAutocomplete() {
-        // Set the data source as self
         mainAutocomplete.autocompleteDataSource = self;
-        // Set the delegate as self
         mainAutocomplete.autocompleteDelegate = self;
-        // Set minimum count of characters to show autocomplete
         mainAutocomplete.minCountOfCharsToShow = 1;
-        // Set maximum of visible rows
         mainAutocomplete.maxVisibleRowsCount = 2;
-        // Set cell height
         mainAutocomplete.cellHeight = 32;
-        // Set border
         mainAutocomplete.setBorder(1.5, cornerRadius: 8.0, color: UIColor.groupTableViewBackgroundColor());
+
+        secAutocomplete.autocompleteDataSource = self;
+        secAutocomplete.autocompleteDelegate = self;
+        secAutocomplete.minCountOfCharsToShow = 1;
+        secAutocomplete.maxVisibleRowsCount = 2;
+        secAutocomplete.cellHeight = 32;
+        secAutocomplete.setBorder(1.5, cornerRadius: 8.0, color: UIColor.groupTableViewBackgroundColor());
     }
 
     
